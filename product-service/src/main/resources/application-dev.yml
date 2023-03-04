@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: ${APPLICATION_NAME:product-service}
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: market-product
+      username: admin
+      password: password
+      authentication-database: admin
+
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure.include: beans, env, health, info, metrics, mappings
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 8082
